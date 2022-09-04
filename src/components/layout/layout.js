@@ -1,15 +1,7 @@
 import React from "react";
 import { makeStyles, createStyles, Theme } from "@mui/styles";
 
-import {
-  Container,
-  Box,
-  Toolbar,
-  Grid,
-  IconButton,
-  Menu,
-  MenuItem,
-} from "@mui/material";
+import { Container, Toolbar, Grid, Paper } from "@mui/material";
 import { Link } from "gatsby";
 
 import SubjectTwoToneIcon from "@mui/icons-material/SubjectTwoTone";
@@ -25,24 +17,30 @@ export default function Layout(props) {
 
   return (
     <div>
-      <Container
-        maxWidth="lg"
-        style={{ paddingLeft: "8px", paddingRight: "4px" }}
+      <Paper
+        elevation={0}
+        style={{ borderRadius: "0px", borderBottom: "1px solid lightgrey" }}
       >
-        <Box my={1}>
+        <Container
+          maxWidth="lg"
+          style={{
+            paddingLeft: "8px",
+            paddingRight: "4px",
+            marginBottom: "0px",
+          }}
+        >
           <Toolbar
             className={classes.toolbarSecondary}
             style={{
               paddingLeft: 0,
               paddingRight: 0,
-              borderBottom: "1px solid lightgrey",
             }}
           >
             <Grid container spacing="1" alignItems="center">
               <Grid item>
                 {" "}
                 <Link to="/" className={classes.Link}>
-                  Tian's Travel Map
+                  Tian & Yi's Travel Map
                 </Link>
               </Grid>
             </Grid>
@@ -53,10 +51,11 @@ export default function Layout(props) {
               </IconButton> */}
             </div>
           </Toolbar>
-        </Box>
-      </Container>
-
-      <main>{props.children}</main>
+        </Container>
+      </Paper>
+      <main>
+        <div style={{ padding: "0px" }}>{props.children}</div>
+      </main>
       {/* <Copyright /> */}
       <StickyFooter />
     </div>

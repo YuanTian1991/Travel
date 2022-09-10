@@ -1,5 +1,5 @@
 ---
-slug: '/trips/Gougane-Barra'
+slug: '/trips/2022-07-12-Gougane-Barra'
 start: '2022-07-12'
 end: '2022-07-12'
 place: 'Gougane Barra'

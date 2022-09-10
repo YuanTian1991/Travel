@@ -12,9 +12,13 @@ const useStyles = makeStyles((theme) => ({}));
 
 export default function IndexPage(props) {
   const classes = useStyles();
+  const [trips, setTrips] = useState([]);
 
   useEffect(() => {
-    console.log(props);
+    var trips = props.data.allMarkdownRemark.edges.map(
+      (x) => x.node.frontmatter
+    );
+    setTrips(trips);
   }, []);
 
   return (
@@ -23,40 +27,13 @@ export default function IndexPage(props) {
         <Grid container spacing={2}>
           <Grid item xs={12} md={4}></Grid>
           <Grid item xs={12} md={8}>
-            <GMap />
+            <GMap trips={trips} />
           </Grid>
         </Grid>
       </Box>
     </Layout>
   );
 }
-
-// export const pageQuery = graphql`
-//   {
-//     allMarkdownRemark(
-//       sort: { order: DESC, fields: [frontmatter___start] }
-//       limit: 1000
-//     ) {
-//       edges {
-//         node {
-//           frontmatter {
-//             slug
-//             start(formatString: "MMMM DD, YYYY")
-//             end(formatString: "MMMM DD, YYYY")
-//             place
-//             level
-//             province
-//             country
-//             lon
-//             lat
-//             type
-//             abstract
-//           }
-//         }
-//       }
-//     }
-//   }
-// `;
 
 export const pageQuery = graphql`
   {

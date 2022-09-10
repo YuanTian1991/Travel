@@ -1,5 +1,5 @@
 ---
-slug: '/trips/Howth'
+slug: '/trips/2022-07-14-Howth'
 start: '2022-07-14'
 end: '2022-07-14'
 place: 'Howth'

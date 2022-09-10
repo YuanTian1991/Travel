@@ -1,5 +1,5 @@
 ---
-slug: '/trips/Cliffs-of-Moher'
+slug: '/trips/2022-07-16-Cliffs-of-Moher'
 start: '2022-07-16'
 end: '2022-07-16'
 place: 'Cliffs of Moher'

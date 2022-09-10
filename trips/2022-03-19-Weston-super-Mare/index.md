@@ -1,5 +1,5 @@
 ---
-slug: '/trips/Weston-super-Mare'
+slug: '/trips/2022-03-19-Weston-super-Mare'
 start: '2022-03-19'
 end: '2022-03-19'
 place: 'Weston-super-Mare'

@@ -1,5 +1,5 @@
 ---
-slug: '/trips/Unknown-Swainswick'
+slug: '/trips/UnknownTime-Swainswick'
 start: 
 end:
 place: 'Swainswick'

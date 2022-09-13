@@ -49,56 +49,50 @@ export default function IndexPage(props) {
             >
               <ImageList variant="masonry" cols={3} gap={8}>
                 {trips.map((item, index) => (
-                  <ImageListItem key={index}>
-                    <img
-                      src={item.imgs[0].node.childImageSharp.fluid.src}
-                      // src={`${item.img}?w=162&auto=format`}
-                      // srcSet={`${item.img}?w=162&auto=format&dpr=2 2x`}
-                      alt={item.place}
-                      // loading="lazy"
+                  <div>
+                    <div
                       style={{
-                        borderTopLeftRadius: 4,
-                        borderTopRightRadius: 4,
-                        borderBottomLeftRadius: 4,
-                        borderBottomRightRadius: 4,
-                        display: "block",
-                        width: "100%",
+                        position: "absolute",
+                        zIndex: 999,
+                        width: "300px",
+                        heigt: "100px",
+                        paddingTop: "8px",
+                        paddingLeft: "10px",
                       }}
-                    />
-                  </ImageListItem>
+                    >
+                      <p
+                        style={{
+                          // textAlign: "center",
+                          zIndex: 1000,
+                          fontWeight: "300",
+                          color: "black",
+                          fontSize: "0.7vw",
+                        }}
+                      >
+                        {item.place}
+                      </p>
+                    </div>
+                    <ImageListItem key={index}>
+                      <img
+                        src={item.imgs[0].node.childImageSharp.fluid.src}
+                        // src={`${item.img}?w=162&auto=format`}
+                        // srcSet={`${item.img}?w=162&auto=format&dpr=2 2x`}
+                        alt={item.place}
+                        // loading="lazy"
+                        style={{
+                          borderTopLeftRadius: 4,
+                          borderTopRightRadius: 4,
+                          borderBottomLeftRadius: 4,
+                          borderBottomRightRadius: 4,
+                          display: "block",
+                          width: "100%",
+                        }}
+                      />
+                    </ImageListItem>
+                  </div>
                 ))}
               </ImageList>
             </Box>
-
-            {/* <Box
-              sx={{ width: "100%", height: window.innerHeight - 105 }}
-              style={{ paddingLeft: "0.8em", paddingTop: "1em" }}
-            >
-              <Masonry columns={3} spacing={2}>
-                {trips.map((item, index) => (
-                  <div
-                    key={index}
-                    style={{
-                      borderRadius: "0px",
-                    }}
-                  >
-                    <img
-                      src={item.imgs[0].node.childImageSharp.fluid.src}
-                      // src={`${item.img}?w=162&auto=format`}
-                      // srcSet={`${item.img}?w=162&auto=format&dpr=2 2x`}
-                      alt={item.place}
-                      // loading="lazy"
-                      style={{
-                        borderBottomLeftRadius: 4,
-                        borderBottomRightRadius: 4,
-                        display: "block",
-                        width: "100%",
-                      }}
-                    />
-                  </div>
-                ))}
-              </Masonry>
-            </Box> */}
           </Grid>
           <Grid item xs={12} md={8} style={{ paddingLeft: "0px" }}>
             <GMap trips={trips} />

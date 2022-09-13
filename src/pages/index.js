@@ -9,6 +9,9 @@ import GMap from "../components/googleMap/gmap";
 import { Grid, Box, Item, Paper } from "@mui/material";
 import Masonry from "@mui/lab/Masonry";
 
+import ImageList from "@mui/material/ImageList";
+import ImageListItem from "@mui/material/ImageListItem";
+
 const useStyles = makeStyles((theme) => ({}));
 
 export default function IndexPage(props) {
@@ -42,16 +45,45 @@ export default function IndexPage(props) {
           <Grid item xs={12} md={4}>
             <Box
               sx={{ width: "100%", height: window.innerHeight - 105 }}
+              style={{ paddingRight: "1.5em", paddingTop: "1em" }}
+            >
+              <ImageList variant="masonry" cols={3} gap={8}>
+                {trips.map((item, index) => (
+                  <ImageListItem key={index}>
+                    <img
+                      src={item.imgs[0].node.childImageSharp.fluid.src}
+                      // src={`${item.img}?w=162&auto=format`}
+                      // srcSet={`${item.img}?w=162&auto=format&dpr=2 2x`}
+                      alt={item.place}
+                      // loading="lazy"
+                      style={{
+                        borderTopLeftRadius: 4,
+                        borderTopRightRadius: 4,
+                        borderBottomLeftRadius: 4,
+                        borderBottomRightRadius: 4,
+                        display: "block",
+                        width: "100%",
+                      }}
+                    />
+                  </ImageListItem>
+                ))}
+              </ImageList>
+            </Box>
+
+            {/* <Box
+              sx={{ width: "100%", height: window.innerHeight - 105 }}
               style={{ paddingLeft: "0.8em", paddingTop: "1em" }}
             >
               <Masonry columns={3} spacing={2}>
                 {trips.map((item, index) => (
-                  <Paper key={index} style={{ borderRadius: "0px" }}>
-                    <p style={{ textAlign: "center", fontSize: "0.8em" }}>
-                      {item.place}
-                    </p>
+                  <div
+                    key={index}
+                    style={{
+                      borderRadius: "0px",
+                    }}
+                  >
                     <img
-                      src={`${item.imgs[0].node.childImageSharp.fluid.base64}`}
+                      src={item.imgs[0].node.childImageSharp.fluid.src}
                       // src={`${item.img}?w=162&auto=format`}
                       // srcSet={`${item.img}?w=162&auto=format&dpr=2 2x`}
                       alt={item.place}
@@ -63,10 +95,10 @@ export default function IndexPage(props) {
                         width: "100%",
                       }}
                     />
-                  </Paper>
+                  </div>
                 ))}
               </Masonry>
-            </Box>
+            </Box> */}
           </Grid>
           <Grid item xs={12} md={8} style={{ paddingLeft: "0px" }}>
             <GMap trips={trips} />
@@ -83,10 +115,9 @@ export const pageQuery = graphql`
       edges {
         node {
           childImageSharp {
-            fluid(quality: 100, toFormatBase64: NO_CHANGE) {
+            fluid(quality: 100, jpegQuality: 100, toFormatBase64: NO_CHANGE) {
               originalName
               ...GatsbyImageSharpFluid
-              sizes
             }
           }
           absolutePath

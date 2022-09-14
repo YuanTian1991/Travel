@@ -42,59 +42,75 @@ export default function IndexPage(props) {
     <Layout>
       <Box sx={{ flexGrow: 1 }}>
         <Grid container spacing={2}>
-          <Grid item xs={12} md={4}>
+          <Grid item xs={12} md={5}>
             <Box
               sx={{ width: "100%", height: window.innerHeight - 105 }}
-              style={{ paddingRight: "1.5em", paddingTop: "1em" }}
+              style={{
+                paddingRight: "1.5em",
+                paddingTop: "1em",
+                overflow: "auto",
+              }}
             >
-              <ImageList variant="masonry" cols={3} gap={8}>
+              <ImageList variant="masonry" cols={2} gap={20}>
                 {trips.map((item, index) => (
-                  <div>
+                  <ImageListItem key={index}>
                     <div
                       style={{
                         position: "absolute",
                         zIndex: 999,
-                        width: "300px",
+                        width: "100%",
                         heigt: "100px",
-                        paddingTop: "8px",
+                        bottom: "0px",
+                        // paddingTop: "4px",
                         paddingLeft: "10px",
+                        backgroundColor: "rgb(255,255,255,0.6)",
+                        display: "flex",
+                        justifyContent: "left",
+                        alignItems: "center",
                       }}
                     >
-                      <p
+                      <span
                         style={{
                           // textAlign: "center",
                           zIndex: 1000,
-                          fontWeight: "300",
+                          fontWeight: "600",
                           color: "black",
-                          fontSize: "0.7vw",
+                          fontSize: "0.75vw",
                         }}
                       >
                         {item.place}
-                      </p>
-                    </div>
-                    <ImageListItem key={index}>
-                      <img
-                        src={item.imgs[0].node.childImageSharp.fluid.src}
-                        // src={`${item.img}?w=162&auto=format`}
-                        // srcSet={`${item.img}?w=162&auto=format&dpr=2 2x`}
-                        alt={item.place}
-                        // loading="lazy"
+                      </span>
+                      <span
                         style={{
-                          borderTopLeftRadius: 4,
-                          borderTopRightRadius: 4,
-                          borderBottomLeftRadius: 4,
-                          borderBottomRightRadius: 4,
-                          display: "block",
-                          width: "100%",
+                          fontSize: "0.6vw",
+                          fontWeight: "500",
+                          marginLeft: "10px",
                         }}
-                      />
-                    </ImageListItem>
-                  </div>
+                      >
+                        {item.country}
+                      </span>
+                    </div>
+                    <img
+                      src={item.imgs[0].node.childImageSharp.fluid.src}
+                      // src={`${item.img}?w=162&auto=format`}
+                      // srcSet={`${item.img}?w=162&auto=format&dpr=2 2x`}
+                      alt={item.place}
+                      // loading="lazy"
+                      style={{
+                        borderTopLeftRadius: 4,
+                        borderTopRightRadius: 4,
+                        borderBottomLeftRadius: 4,
+                        borderBottomRightRadius: 4,
+                        display: "block",
+                        width: "100%",
+                      }}
+                    />
+                  </ImageListItem>
                 ))}
               </ImageList>
             </Box>
           </Grid>
-          <Grid item xs={12} md={8} style={{ paddingLeft: "0px" }}>
+          <Grid item xs={12} md={7} style={{ paddingLeft: "0px" }}>
             <GMap trips={trips} />
           </Grid>
         </Grid>

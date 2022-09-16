@@ -6,6 +6,8 @@ import { Link } from "gatsby";
 
 import SubjectTwoToneIcon from "@mui/icons-material/SubjectTwoTone";
 
+import Logo from "../../images/Logo.png";
+
 import StickyFooter from "./footer.js";
 
 export default function Layout(props) {
@@ -40,7 +42,17 @@ export default function Layout(props) {
               <Grid item>
                 {" "}
                 <Link to="/" className={classes.Link}>
-                  Tian & Yi's Travel Map
+                  {/* Tian & Yi's Travel Map */}
+                  <img
+                    src={Logo}
+                    style={{
+                      // display: "block",
+                      position: "absolute",
+                      top: "10px",
+                      height: "60px",
+                      zIndex: 1000,
+                    }}
+                  />
                 </Link>
               </Grid>
             </Grid>
@@ -73,6 +85,7 @@ const useStyles = makeStyles((theme) => ({
     textDecoration: "none",
     color: "black",
     fontWeight: "thin",
+    paddingTop: "8px",
     "&:hover ": {
       color: "black",
       textDecoration: "none",

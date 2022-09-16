@@ -44,10 +44,11 @@ export default function IndexPage(props) {
         <Grid container spacing={2}>
           <Grid item xs={12} md={5}>
             <Box
-              sx={{ width: "100%", height: window.innerHeight - 105 }}
+              sx={{ width: "100%", height: window.innerHeight - 115 }}
               style={{
                 paddingRight: "1.5em",
                 paddingTop: "1em",
+                marginTop: "10px",
                 overflow: "auto",
               }}
             >
@@ -64,9 +65,9 @@ export default function IndexPage(props) {
                         // paddingTop: "4px",
                         paddingLeft: "10px",
                         backgroundColor: "rgb(255,255,255,0.6)",
-                        display: "flex",
-                        justifyContent: "left",
-                        alignItems: "center",
+                        // display: "flex",
+                        // justifyContent: "left",
+                        // alignItems: "center",
                       }}
                     >
                       <span

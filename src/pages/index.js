@@ -17,6 +17,7 @@ const useStyles = makeStyles((theme) => ({}));
 export default function IndexPage(props) {
   const classes = useStyles();
   const [trips, setTrips] = useState([]);
+  const [selectCard, setSelectedCard] = useState(null);
 
   useEffect(() => {
     var trips = props.data.allMarkdownRemark.edges.map(
@@ -38,6 +39,12 @@ export default function IndexPage(props) {
     setTrips(trips);
   }, []);
 
+  const handleHoverOnCard = (item) => {
+    console.log(item);
+
+    setSelectedCard(item);
+  };
+
   return (
     <Layout>
       <Box sx={{ flexGrow: 1 }}>
@@ -54,7 +61,25 @@ export default function IndexPage(props) {
             >
               <ImageList variant="masonry" cols={2} gap={20}>
                 {trips.map((item, index) => (
-                  <ImageListItem key={index}>
+                  <ImageListItem
+                    key={index}
+                    onMouseOver={() => handleHoverOnCard(item)}
+                    onMouseOut={() => handleHoverOnCard(null)}
+                    style={{
+                      borderRadius: 4,
+                      // margin: "10px",
+                      transform:
+                        "scale(1)" /* you need a scale here to allow it to transition in both directions */,
+                      transition: "0.15s all ease",
+                      cursor: "pointer",
+                      margin:
+                        selectCard !== null
+                          ? item.slug === selectCard.slug
+                            ? "5px"
+                            : "15px"
+                          : "15px",
+                    }}
+                  >
                     <div
                       style={{
                         position: "absolute",

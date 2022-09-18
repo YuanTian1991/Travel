@@ -1,13 +1,29 @@
 import React, { useEffect, useState } from "react";
 import { makeStyles } from "@mui/styles";
 
-import { Link, graphql, navigate } from "gatsby";
+import { StaticQuery, Link, graphql, navigate } from "gatsby";
 import Img from "gatsby-image";
 
 import Layout from "../components/layout/layout";
 import GMap from "../components/googleMap/gmap";
-import { Grid, Box, Item, Paper } from "@mui/material";
+import {
+  Grid,
+  Box,
+  Item,
+  Paper,
+  Button,
+  IconButton,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogActions,
+} from "@mui/material";
 import Masonry from "@mui/lab/Masonry";
+import CameraIcon from "@mui/icons-material/Camera";
+import CloseIcon from "@mui/icons-material/Close";
+
+import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
+import { Carousel } from "react-responsive-carousel";
 
 import ImageList from "@mui/material/ImageList";
 import ImageListItem from "@mui/material/ImageListItem";
@@ -18,6 +34,7 @@ export default function IndexPage(props) {
   const classes = useStyles();
   const [trips, setTrips] = useState([]);
   const [selectCard, setSelectedCard] = useState(null);
+  const [Galary, setGalary] = useState(null);
 
   useEffect(() => {
     var trips = props.data.allMarkdownRemark.edges.map(
@@ -41,8 +58,15 @@ export default function IndexPage(props) {
 
   const handleHoverOnCard = (item) => {
     console.log(item);
-
     setSelectedCard(item);
+  };
+
+  const handleCoupleClick = (item) => {
+    setGalary(item);
+  };
+
+  const toggleDrawer = () => {
+    setGalary(null);
   };
 
   return (
@@ -63,8 +87,9 @@ export default function IndexPage(props) {
                 {trips.map((item, index) => (
                   <ImageListItem
                     key={index}
-                    onMouseOver={() => handleHoverOnCard(item)}
-                    onMouseOut={() => handleHoverOnCard(null)}
+                    onClick={() => handleHoverOnCard(item)}
+                    onDoubleClick={() => handleCoupleClick(item)}
+                    // onMouseOut={() => handleHoverOnCard(null)}
                     style={{
                       borderRadius: 4,
                       // margin: "10px",
@@ -80,6 +105,28 @@ export default function IndexPage(props) {
                           : "15px",
                     }}
                   >
+                    <div
+                      style={{
+                        position: "absolute",
+                        zIndex: 999,
+                        // width: "60px",
+                        // heigt: "100px",
+                        top: "5px",
+                        right: "5px",
+                        // paddingTop: "4px",
+                        backgroundColor: "rgb(255,255,255,0)",
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center",
+                      }}
+                    >
+                      <IconButton
+                        style={{ color: "#616161" }}
+                        onClick={() => handleCoupleClick(item)}
+                      >
+                        <CameraIcon />
+                      </IconButton>
+                    </div>
                     <div
                       style={{
                         position: "absolute",
@@ -101,14 +148,14 @@ export default function IndexPage(props) {
                           zIndex: 1000,
                           fontWeight: "600",
                           color: "black",
-                          fontSize: "0.75vw",
+                          fontSize: "0.9em",
                         }}
                       >
                         {item.place}
                       </span>
                       <span
                         style={{
-                          fontSize: "0.6vw",
+                          fontSize: "0.8em",
                           fontWeight: "500",
                           marginLeft: "10px",
                         }}
@@ -140,6 +187,48 @@ export default function IndexPage(props) {
             <GMap trips={trips} selectCard={selectCard} />
           </Grid>
         </Grid>
+
+        <Dialog
+          maxWidth={"63vw"}
+          onClose={() => setGalary(null)}
+          open={Galary !== null}
+        >
+          <div style={{ width: "60vw" }}>
+            {Galary !== null && (
+              <Carousel>
+                {Galary.imgs.map((img, imgIndex) => {
+                  return (
+                    <div>
+                      <p
+                        className="legend"
+                        style={{
+                          borderRadius: 4,
+                          backgroundColor: "rgb(0,0,0,0.4)",
+                          width: "200px",
+                          // color: "black",
+                        }}
+                      >
+                        {img.node.childImageSharp.fluid.originalName}
+                      </p>
+                      <img
+                        src={
+                          img.node.childImageSharp.gatsbyImageData.images
+                            .fallback.src
+                        }
+                        loading="lazy"
+                        style={{
+                          maxHeight: "40vw",
+                          width: "auto",
+                          height: "auto",
+                        }}
+                      />
+                    </div>
+                  );
+                })}
+              </Carousel>
+            )}
+          </div>
+        </Dialog>
       </Box>
     </Layout>
   );
@@ -151,6 +240,7 @@ export const pageQuery = graphql`
       edges {
         node {
           childImageSharp {
+            gatsbyImageData
             fluid(quality: 100, jpegQuality: 100, toFormatBase64: NO_CHANGE) {
               originalName
               ...GatsbyImageSharpFluid

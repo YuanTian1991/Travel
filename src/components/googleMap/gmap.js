@@ -36,7 +36,7 @@ function MyComponent(props) {
       console.log(props.selectCard);
       setCenter({ lat: props.selectCard.lat, lng: props.selectCard.lon });
 
-      map.panTo(center);
+      map.panTo({ lat: props.selectCard.lat, lng: props.selectCard.lon });
     }
   }, [props.selectCard]);
 

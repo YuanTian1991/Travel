@@ -75,7 +75,13 @@ export default function IndexPage(props) {
         <Grid container spacing={2}>
           <Grid item xs={12} md={5}>
             <Box
-              sx={{ width: "100%", height: window.innerHeight - 115 }}
+              sx={{
+                width: "100%",
+                height:
+                  typeof window !== "undefined"
+                    ? window.innerHeight - 115
+                    : "100vh",
+              }}
               style={{
                 paddingRight: "1.5em",
                 paddingTop: "1em",

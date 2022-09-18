@@ -1,7 +1,8 @@
 module.exports = {
+  pathPrefix: "/Travel",
   siteMetadata: {
     title: `Travel`,
-    siteUrl: `https://www.yourdomain.tld`,
+    siteUrl: `https://yuantian1991.github.io/travel`,
   },
   plugins: [
     "gatsby-plugin-material-ui",

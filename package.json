@@ -1,5 +1,5 @@
 {
-  "name": "travel",
+  "name": "Tian&Yi's TravelMap",
   "version": "1.0.0",
   "private": true,
   "description": "travel",
@@ -12,7 +12,8 @@
     "start": "gatsby develop",
     "build": "gatsby build",
     "serve": "gatsby serve",
-    "clean": "gatsby clean"
+    "clean": "gatsby clean",
+    "deploy": "gatsby build --prefix-paths && gh-pages -f public"
   },
   "dependencies": {
     "@emotion/react": "^11.10.4",
@@ -33,6 +34,7 @@
     "gatsby-source-filesystem": "^4.22.0",
     "gatsby-transformer-remark": "^5.22.0",
     "gatsby-transformer-sharp": "^4.22.0",
+    "gh-pages": "^4.0.0",
     "google-map-react": "^2.2.0",
     "react": "^18.1.0",
     "react-dom": "^18.1.0",

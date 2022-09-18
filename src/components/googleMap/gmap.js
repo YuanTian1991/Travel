@@ -9,7 +9,7 @@ import { HandymanOutlined } from "@mui/icons-material";
 
 const containerStyle = {
   width: "100%",
-  height: window.innerHeight - 105,
+  height: typeof window !== "undefined" ? window.innerHeight - 105 : "100vh",
 };
 
 function MyComponent(props) {

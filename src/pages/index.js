@@ -137,7 +137,7 @@ export default function IndexPage(props) {
             </Box>
           </Grid>
           <Grid item xs={12} md={7} style={{ paddingLeft: "0px" }}>
-            <GMap trips={trips} />
+            <GMap trips={trips} selectCard={selectCard} />
           </Grid>
         </Grid>
       </Box>

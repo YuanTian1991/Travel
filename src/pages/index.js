@@ -77,10 +77,7 @@ export default function IndexPage(props) {
             <Box
               sx={{
                 width: "100%",
-                height:
-                  typeof window !== "undefined"
-                    ? window.innerHeight - 115
-                    : "100vh",
+                height: "calc(100vh - 115px)",
               }}
               style={{
                 paddingRight: "1.5em",

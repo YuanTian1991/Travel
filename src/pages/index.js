@@ -61,7 +61,7 @@ export default function IndexPage(props) {
     setSelectedCard(item);
   };
 
-  const handleCoupleClick = (item) => {
+  const handleDoubleClick = (item) => {
     setGalary(item);
   };
 
@@ -88,10 +88,10 @@ export default function IndexPage(props) {
                   <ImageListItem
                     key={index}
                     onClick={() => handleHoverOnCard(item)}
-                    onDoubleClick={() => handleCoupleClick(item)}
+                    onDoubleClick={() => handleDoubleClick(item)}
                     // onMouseOut={() => handleHoverOnCard(null)}
                     style={{
-                      borderRadius: 4,
+                      borderRadius: 6,
                       // margin: "10px",
                       transform:
                         "scale(1)" /* you need a scale here to allow it to transition in both directions */,
@@ -103,6 +103,12 @@ export default function IndexPage(props) {
                             ? "5px"
                             : "15px"
                           : "15px",
+                      border:
+                        selectCard !== null
+                          ? item.slug === selectCard.slug
+                            ? "2px solid black"
+                            : "1px solid white"
+                          : "1px solid white",
                     }}
                   >
                     <div
@@ -122,7 +128,7 @@ export default function IndexPage(props) {
                     >
                       <IconButton
                         style={{ color: "#616161" }}
-                        onClick={() => handleCoupleClick(item)}
+                        onClick={() => handleDoubleClick(item)}
                       >
                         <CameraIcon />
                       </IconButton>
@@ -137,6 +143,8 @@ export default function IndexPage(props) {
                         // paddingTop: "4px",
                         paddingLeft: "10px",
                         backgroundColor: "rgb(255,255,255,0.6)",
+                        borderBottomLeftRadius: 4,
+                        borderBottomRightRadius: 4,
                         // display: "flex",
                         // justifyContent: "left",
                         // alignItems: "center",
@@ -148,14 +156,14 @@ export default function IndexPage(props) {
                           zIndex: 1000,
                           fontWeight: "600",
                           color: "black",
-                          fontSize: "0.9em",
+                          fontSize: "0.8em",
                         }}
                       >
                         {item.place}
                       </span>
                       <span
                         style={{
-                          fontSize: "0.8em",
+                          fontSize: "0.65em",
                           fontWeight: "500",
                           marginLeft: "10px",
                         }}
@@ -184,7 +192,12 @@ export default function IndexPage(props) {
             </Box>
           </Grid>
           <Grid item xs={12} md={7} style={{ paddingLeft: "0px" }}>
-            <GMap trips={trips} selectCard={selectCard} />
+            <GMap
+              trips={trips}
+              selectCard={selectCard}
+              onMarkerClicked={handleHoverOnCard}
+              onInfoWindowClicked={handleDoubleClick}
+            />
           </Grid>
         </Grid>
 

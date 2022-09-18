@@ -1,5 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { GoogleMap, useJsApiLoader, Marker } from "@react-google-maps/api";
+import {
+  GoogleMap,
+  useJsApiLoader,
+  Marker,
+  InfoWindow,
+} from "@react-google-maps/api";
+import { HandymanOutlined } from "@mui/icons-material";
 
 const containerStyle = {
   width: "100%",
@@ -40,6 +46,22 @@ function MyComponent(props) {
     }
   }, [props.selectCard]);
 
+  const handleClickMarker = (item) => {
+    props.onMarkerClicked(item);
+  };
+
+  const handleCloseInfoWindow = () => {
+    props.onMarkerClicked(null);
+  };
+
+  const handleClickInfoWindow = (item) => {
+    props.onInfoWindowClicked(item);
+  };
+
+  const handleMapClick = () => {
+    props.onMarkerClicked(null);
+  };
+
   return isLoaded ? (
     <GoogleMap
       mapContainerStyle={containerStyle}
@@ -47,12 +69,57 @@ function MyComponent(props) {
       // zoom={zoom}
       onLoad={onLoad}
       onUnmount={onUnmount}
+      onClick={() => handleMapClick()}
     >
       {props.trips.map((trip, tripIndex) => {
         return (
-          <Marker key={tripIndex} position={{ lat: trip.lat, lng: trip.lon }} />
+          <Marker
+            key={tripIndex}
+            position={{ lat: trip.lat, lng: trip.lon }}
+            onClick={() => handleClickMarker(trip)}
+          />
         );
       })}
+      {props.selectCard !== null && (
+        <InfoWindow
+          onCloseClick={() => handleCloseInfoWindow()}
+          position={{
+            lat: props.selectCard.lat,
+            lng: props.selectCard.lon,
+          }}
+          style={{ padding: "0px", margin: "0px", border: "1px solid red" }}
+        >
+          <div style={{ paddingLeft: "6px" }}>
+            <p
+              style={{
+                margin: "0px",
+                padding: "0px",
+                paddingBottom: "5px",
+                fontWeight: "500",
+              }}
+            >
+              {props.selectCard.place}
+            </p>
+            <img
+              src={props.selectCard.imgs[0].node.childImageSharp.fluid.src}
+              // src={`${item.img}?w=162&auto=format`}
+              // srcSet={`${item.img}?w=162&auto=format&dpr=2 2x`}
+              alt={props.selectCard.place}
+              // loading="lazy"
+              style={{
+                borderTopLeftRadius: 4,
+                borderTopRightRadius: 4,
+                borderBottomLeftRadius: 4,
+                borderBottomRightRadius: 4,
+                // display: "block",
+                width: "200px",
+                margin: "0px",
+              }}
+              onClick={() => handleClickInfoWindow(props.selectCard)}
+            />
+          </div>
+        </InfoWindow>
+      )}
     </GoogleMap>
   ) : (
     <></>

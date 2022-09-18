@@ -13,7 +13,8 @@
     "build": "gatsby build",
     "serve": "gatsby serve",
     "clean": "gatsby clean",
-    "deploy": "gatsby build --prefix-paths && gh-pages -f public"
+    "deploy": "gatsby build --prefix-paths && gh-pages -f public",
+    "push": "git add . && git commit -m 'Update Travel Log.' && git push origin source"
   },
   "dependencies": {
     "@emotion/react": "^11.10.4",
